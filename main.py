@@ -130,5 +130,3 @@ def remove_product(user_id, product_id):
 if __name__ == "__main__":
     if os.path.exists('betsy-webshop.db') == False:
         populate_test_data()
-
-# testje
