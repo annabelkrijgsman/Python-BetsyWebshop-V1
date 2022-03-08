@@ -19,7 +19,7 @@ class Product(BaseModel):
 
 class User(BaseModel):
     name = CharField(unique=True, index=True)
-    adress = CharField()
+    address = CharField()
     billing_info = TextField()
 
 class User_Products(BaseModel):

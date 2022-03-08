@@ -27,10 +27,10 @@ def populate_test_data():
     table = Product.create(name="Table", description="Wooden table", price_per_unit=145, stock=4)
     chair = Product.create(name="Chair", description="Upholstered chair", price_per_unit=60, stock=8)
 
-    # Users: name, adress, billing_info
-    didi = User.create(name="Didi", adress="Cherokee Plaza 274", billing_info='Didi King, Cherokee Plaza 274, 1504 AA, Amsterdam')
-    lucius = User.create(name="Lucius", adress="ORM Street 23", billing_info='Lucius Burrows, Golf Parkway 992, 3439 ZZ, Nieuw-Lekkerland')
-    phil = User.create(name="Phil", adress="Python Lane 13", billing_info='Phil Ginn, Stone Corner Alley 246, 4004 BB, Apeldoorn')
+    # Users: name, address, billing_info
+    didi = User.create(name="Didi", address="Cherokee Plaza 274", billing_info='Didi King, Cherokee Plaza 274, 1504 AA, Amsterdam')
+    lucius = User.create(name="Lucius", address="ORM Street 23", billing_info='Lucius Burrows, Golf Parkway 992, 3439 ZZ, Nieuw-Lekkerland')
+    phil = User.create(name="Phil", address="Python Lane 13", billing_info='Phil Ginn, Stone Corner Alley 246, 4004 BB, Apeldoorn')
 
     User_Products.create(user=didi, product=apple_pie, quantity_owned=1)
     User_Products.create(user=didi, product=stroopwafel, quantity_owned=20)
@@ -83,6 +83,7 @@ def list_products_per_tag(tag_id):
 
     print(tag_products)
 
+# Check check check > fails
 def add_product_to_catalog(user_id, product):
     '''Add product to given user'''
     get_user = User.get(User.id == user_id)
@@ -98,6 +99,7 @@ def update_stock(product_id, new_quantity):
 
     print('Successfully updated stock')
 
+# Check check check > fails
 def purchase_product(product_id, buyer_id, quantity):
     '''Store user instance and product name so both can be used to: add a product to a user's catalog, update quantity of product owned by a user'''
     user = User.get(User.id == buyer_id)
