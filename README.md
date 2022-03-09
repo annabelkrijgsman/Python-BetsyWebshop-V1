@@ -2,7 +2,7 @@
 
 Betsy Webshop is a database management system for a fictional marketplace where users can buy and sell products.
 
-### Delete or create database
+## Delete or create database
 
 1. Go to your terminal
 2. Enter **py** and press enter
@@ -12,7 +12,7 @@ To _delete_ the current database type in **setupdb.delete_database()**
 
 To _create_ a new database type in **setupdb.create_database()**
 
-### Check functions
+## Check functions
 
 1. Go to your terminal
 2. Enter **py** and press enter
@@ -30,7 +30,7 @@ main.purchase_product(1, 3, 4)
 main.remove_product(1)
 ```
 
-### Check the database
+## Check the database
 
 1. Make sure the database is created (see above)
 2. Go to your terminal
@@ -40,8 +40,8 @@ main.remove_product(1)
 6. Enter **.table** and press enter to see an overview of all existing tables
 7. Select one of the tables, for example:
 
-   **SELECT \* FROM users;**
+**SELECT \* FROM users;**
 
-   Or
+Or
 
-   **SELECT \* FROM products;**
+**SELECT \* FROM products;**
