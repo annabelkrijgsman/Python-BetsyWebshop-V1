@@ -1,3 +1,5 @@
+from itertools import product
+from math import prod
 from models import *
 from setupdb import *
 from datetime import datetime
@@ -39,9 +41,14 @@ def list_products_per_tag(tag_id: int):
     else:
         print(f"[bold red]:exclamation_mark: No products found with this tag or this tag does not exist[/bold red]")
 
-# # Check check check > fails
-# def add_product_to_catalog(user_id, product):
-#     ...
+def add_product_to_catalog(user_id: int, product_id: int):
+    user = Users.get_by_id(user_id)
+    product = Products.get_by_id(product_id)
+
+    product.owner = user
+    product.save()
+
+    print(f"Product [green]{product.name}[/green] added to [green]{user.name}[/green]")
 
 # def update_stock(product_id, new_quantity):
 #     ...
