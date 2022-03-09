@@ -17,7 +17,7 @@ def search(term: str):
         for product in query:
             print(product.name)
     else:
-        print(f"[bold red]:exclamation_mark: No products found with {term}[/bold red]")
+        print(f"[bold red]:exclamation_mark: No products where found with your search term {term}[/bold red]")
 
 def list_user_products(user_id: int):
     query = Products.select().where(Products.owner == user_id)
@@ -26,20 +26,20 @@ def list_user_products(user_id: int):
         user = Users.get_by_id(user_id)
         print(f"Products of [green]{user.name}[/green]:")
         for product in query:
-            print(f"{product.name}. Amount in stock: {product.amount_in_stock}")
+            print(f"{product.name} - amount in stock: {product.amount_in_stock}")
     else:
-        print(f"[bold red]:exclamation_mark: No match was found or a invalid id was given.[/bold red]")
+        print(f"[bold red]:exclamation_mark: No match was found or an invalid id was given[/bold red]")
 
 def list_products_per_tag(tag_id: int):
     query = Products.select().join(ProductTag).join(Tags).where(Tags.tag_id == tag_id)
 
     if query:
         tag = Tags.get_by_id(tag_id)
-        print(f"Tagged products with the tag [green]{tag.name}[/green]:")
+        print(f"Products with the tag [green]{tag.name}[/green]:")
         for product in query:
             print(f"{product.name}")
     else:
-        print(f"[bold red]:exclamation_mark: No products found with this tag or this tag does not exist[/bold red]")
+        print(f"[bold red]:exclamation_mark: No products where found with this tag or this tag does not exist[/bold red]")
 
 def add_product_to_catalog(user_id: int, product_id: int):
     user = Users.get_by_id(user_id)
@@ -48,7 +48,7 @@ def add_product_to_catalog(user_id: int, product_id: int):
     product.owner = user
     product.save()
 
-    print(f"Product [green]{product.name}[/green] added to [green]{user.name}[/green]")
+    print(f"Product [green]{product.name}[/green] is added to [green]{user.name}[/green]")
 
 def update_stock(product_id, new_quantity):
     query = Products.get_by_id(product_id)
@@ -65,11 +65,11 @@ def purchase_product(product_id: int, buyer_id: int, quantity: int):
     buyer = Users.get_by_id(buyer_id)
 
     if buyer_id == product.owner:
-        print(f"[bold red]:cross_mark: You cannot buy products from yourself {buyer.name}.[/bold red]")
+        print(f"[bold red]:cross_mark: You cannot buy products from yourself {buyer.name}[/bold red]")
 
     if quantity >= product.amount_in_stock:
         print(
-            f"[bold red]:exclamation_mark: Insufficient stock of {product.name}![/bold red] Current stock is {product.amount_in_stock}.")
+            f"[bold red]:exclamation_mark: Insufficient stock of {product.name},[/bold red] current stock is: {product.amount_in_stock}")
 
     else:
         price_per_unit = product.price_per_unit
@@ -83,14 +83,20 @@ def purchase_product(product_id: int, buyer_id: int, quantity: int):
             date=datetime.now().date()
         )
 
-        print(f"On {transaction.date} {buyer.name} bought {quantity} {product.name} for total amount of: € {transaction.purchased_price}.\nPrice per unit is € {price_per_unit}")
+        print(f"On {transaction.date} {buyer.name} bought {quantity}x {product.name} for the total amount of: €{transaction.purchased_price}\nPrice per unit is €{price_per_unit}")
 
         new_quantity = product.amount_in_stock - quantity
 
         update_stock(product_id, new_quantity)
 
-# def remove_product(user_id, product_id):
-#     ...
+def remove_product(product_id):
+    try:
+        query = Products.get_by_id(product_id)
+        print(f"Product [green]{query.name}[/green] has been removed")
+        query.delete_instance()
+
+    except DoesNotExist:
+        print(f"[bold red]:exclamation_mark: Product id {product_id} does not exist or has already been removed[/bold red]")
 
 def main():
     if os.path.exists("betsy-webshop.db") == True:
