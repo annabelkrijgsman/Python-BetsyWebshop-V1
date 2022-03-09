@@ -1,5 +1,3 @@
-from itertools import product
-from math import prod
 from models import *
 from setupdb import *
 from datetime import datetime
