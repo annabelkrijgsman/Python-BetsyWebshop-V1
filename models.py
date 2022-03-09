@@ -45,7 +45,7 @@ class ProductTag(BaseModel):
     class Meta:
         database = db
 
-class Transaction(BaseModel):
+class Transactions(BaseModel):
     transaction_id = AutoField(unique=True)
     buyer = ForeignKeyField(Users)
     purchased_product = ForeignKeyField(Products)
