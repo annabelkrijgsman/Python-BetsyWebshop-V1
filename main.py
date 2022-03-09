@@ -50,10 +50,16 @@ def add_product_to_catalog(user_id: int, product_id: int):
 
     print(f"Product [green]{product.name}[/green] added to [green]{user.name}[/green]")
 
-# def update_stock(product_id, new_quantity):
-#     ...
+def update_stock(product_id, new_quantity):
+    query = Products.get_by_id(product_id)
 
-# # Check check check > fails
+    old_stock = query.amount_in_stock
+    query.amount_in_stock = new_quantity
+    query.save()
+
+    print(f"[green]{query.name}[/green] - old stock: {old_stock}, new stock: {new_quantity}")
+
+
 # def purchase_product(product_id, buyer_id, quantity):
 #     ...
 
