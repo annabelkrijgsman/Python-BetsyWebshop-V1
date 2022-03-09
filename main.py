@@ -60,8 +60,34 @@ def update_stock(product_id, new_quantity):
     print(f"[green]{query.name}[/green] - old stock: {old_stock}, new stock: {new_quantity}")
 
 
-# def purchase_product(product_id, buyer_id, quantity):
-#     ...
+def purchase_product(product_id: int, buyer_id: int, quantity: int):
+    product = Products.get_by_id(product_id)
+    buyer = Users.get_by_id(buyer_id)
+
+    if buyer_id == product.owner:
+        print(f"[bold red]:cross_mark: You cannot buy products from yourself {buyer.name}.[/bold red]")
+
+    if quantity >= product.amount_in_stock:
+        print(
+            f"[bold red]:exclamation_mark: Insufficient stock of {product.name}![/bold red] Current stock is {product.amount_in_stock}.")
+
+    else:
+        price_per_unit = product.price_per_unit
+        purchased_price = round(product.price_per_unit * quantity, 2)
+
+        transaction = Transactions.create(
+            buyer=buyer_id,
+            purchased_product=product_id,
+            purchased_quantity=quantity,
+            purchased_price=purchased_price,
+            date=datetime.now().date()
+        )
+
+        print(f"On {transaction.date} {buyer.name} bought {quantity} {product.name} for total amount of: € {transaction.purchased_price}.\nPrice per unit is € {price_per_unit}")
+
+        new_quantity = product.amount_in_stock - quantity
+
+        update_stock(product_id, new_quantity)
 
 # def remove_product(user_id, product_id):
 #     ...
