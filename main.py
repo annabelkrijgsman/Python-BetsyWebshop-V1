@@ -16,8 +16,16 @@ def search(term: str):
     else:
         print(f"[bold red]:exclamation_mark: No products found with {term}[/bold red]")
 
-# def list_user_products(user_id):
-#     ...
+def list_user_products(user_id: int):
+    query = Products.select().where(Products.owner == user_id)
+
+    if query:
+        user = Users.get_by_id(user_id)
+        print(f"Products of [bold cyan]{user.name}[/bold cyan]:")
+        for product in query:
+            print(f"{product.name}. Amount in stock: {product.amount_in_stock}")
+    else:
+        print(f"[bold red]:exclamation_mark: No match was found or a invalid id was given.[/bold red]")
 
 # def list_products_per_tag(tag_id):
 #     ...
