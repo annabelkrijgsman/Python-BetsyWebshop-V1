@@ -7,7 +7,8 @@ Betsy Webshop is a database management system for a fictional marketplace where 
 1. Go to your terminal
 2. Enter **py** and press enter
 3. Enter **import setupdb** and press enter
-   To _delete_ the current database type in **setupdb.delete_database()**
+
+To _delete_ the current database type in **setupdb.delete_database()**
 
 To _create_ a new database type in **setupdb.create_database()**
 
