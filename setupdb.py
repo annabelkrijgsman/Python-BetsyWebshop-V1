@@ -12,7 +12,7 @@ def delete_database():
 # Create database
 def create_database():
     db.connect()
-    print(f"[green]Database created![/green]")
+    print(f"[bold green]Database created![/bold green]")
 
     db.create_tables([Users, Products, Tags, ProductTag, Transactions])
 
@@ -27,7 +27,7 @@ def create_database():
     shirt = Products.create(owner= phil, name="Shirt", description="Long sleeves, with buttons at the front" ,price_per_unit=129.00, amount_in_stock=5,)
     hoodie = Products.create(owner= lucius, name="Hoodie", description="Sweater with a hood, with pockets at the front" ,price_per_unit=79.95, amount_in_stock=3,)
     chino = Products.create(owner= roger, name="Chino", description="Pants made of cotton, loose fit" ,price_per_unit=39.95, amount_in_stock=12,)
-    cardigan = Products.create(owner= jane, name="Vest", description="Woolen vest with buttons" ,price_per_unit=19.95, amount_in_stock=6,)
+    cardigan = Products.create(owner= jane, name="Cardigan", description="Woolen vest with buttons" ,price_per_unit=19.95, amount_in_stock=6,)
     skirt = Products.create(owner= emma, name="Skirt", description="A fluttery ankle length skirt" ,price_per_unit=14.95, amount_in_stock=18,)
 
     # Tags
