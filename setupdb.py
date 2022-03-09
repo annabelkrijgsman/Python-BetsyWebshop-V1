@@ -8,6 +8,7 @@ def delete_database():
     path_database = os.path.join(cwd, "betsy-webshop.db")
     if os.path.exists(path_database):
         os.remove(path_database)
+        print(f"[bold red]Database deleted![/bold red]")
 
 # Create database
 def create_database():
